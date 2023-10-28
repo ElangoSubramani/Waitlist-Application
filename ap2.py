@@ -26,6 +26,7 @@ class WaitingListApp:
         email = data.get('email')
         name= data.get('name')
         password = data.get('password')
+        total_refers=0
 
         if not email or not name or not password:
             return jsonify({"error": "Name , Email & Password is required"}), 400
@@ -38,7 +39,7 @@ class WaitingListApp:
 
         referral_link = self.generate_referral_link(email)
 
-        self.customer_list_collection.insert_one({"name":name,"email": email,"password":password, "position": position, "referral_link": referral_link})
+        self.customer_list_collection.insert_one({"name":name,"email": email,"password":password, "position": position, "referral_link": referral_link,"total_refers":total_refers})
 
         return jsonify({
             "message": "You have been added to the waiting list",
@@ -46,7 +47,8 @@ class WaitingListApp:
            "email": email,
            "password":password,
              "position": position, 
-             "referral_link": referral_link
+             "referral_link": referral_link,
+             "total_refers":total_refers
         }), 201
 
     def get_position(self, email):
@@ -62,9 +64,12 @@ class WaitingListApp:
         if self.customer_list_collection.find({"email": referral_mail}):
             data = request.get_json()
             email = data.get('email')
+            name= data.get('name')
+            password = data.get('password')
+            total_refers=0
 
-            if not email:
-                return jsonify({"error": "Email is required"}), 400
+            if not email or not name or not password:
+                return jsonify({"error": "Name , Email & Password is required"}), 400
 
             if self.customer_list_collection.find_one({"email": email}):
                 return jsonify({"error": "You are already on the waiting list"}), 400
@@ -74,13 +79,18 @@ class WaitingListApp:
 
             referral_link = self.generate_referral_link(email)
 
-            self.customer_list_collection.insert_one({"email": email, "position": position, "referral_link": referral_link})
+            self.customer_list_collection.insert_one({"name":name,"email": email,"password":password, "position": position, "referral_link": referral_link,"total_refers":total_refers})
 
             return jsonify({
                 "message": "You have been added to the waiting list",
-                "position": position,
-                "referral_link": referral_link
+            "name":name,
+            "email": email,
+            "password":password,
+                "position": position, 
+                "referral_link": referral_link,
+                "total_refers":total_refers
             }), 201
+
         else:
             return jsonify({"error": "Invalid referral link"}), 404
 
