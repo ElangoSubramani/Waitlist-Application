@@ -4,10 +4,9 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 # MongoDB connection
-client = MongoClient("mongodb+srv://Admin:21bda024%40@cluster0.q64wwy9.mongodb.net/")  # Replace with your MongoDB connection string
-db = client["mydatabase"]  # Replace with your database name
-collection = db["mycollection"]  # Replace with your collection name
-
+client = MongoClient("mongodb+srv://Admin:21bda024%40@cluster0.q64wwy9.mongodb.net/")  
+db = client["waiting_list"]  
+collection = db["customers"] 
 # Create a new document
 @app.route("/create", methods=["POST"])
 def create_document():
