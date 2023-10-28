@@ -95,7 +95,14 @@ class WaitingListApp:
             # if updated_status==True:
             #     print("updated")
             # else:
-                # print("not updated")   
+                # print("not updated")  
+
+            if not email or not name or not password:
+                return jsonify({"error": "Name , Email & Password is required"}), 400
+
+            if self.customer_list_collection.find_one({"email": email}):
+                return jsonify({"error": "You are already on the waiting list"}), 400
+#update the position and total_referrals fields of the existing customer which is referral_mail
             self.customer_list_collection.update_one(
                 {"email": referral_mail},
                 {
@@ -105,15 +112,6 @@ class WaitingListApp:
                     }
                 }
             )
-            print(customer["position"])
-            
-
-            if not email or not name or not password:
-                return jsonify({"error": "Name , Email & Password is required"}), 400
-
-            if self.customer_list_collection.find_one({"email": email}):
-                return jsonify({"error": "You are already on the waiting list"}), 400
-
             position = self.current_position
             self.current_position += 1
 
