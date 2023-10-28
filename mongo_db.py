@@ -4,7 +4,7 @@ import pymongo
 client = pymongo.MongoClient("mongodb+srv://Admin:21bda024%40@cluster0.q64wwy9.mongodb.net/")
 
 # Specify the database and collection you want to insert the documents into
-db = client.waiting_list
+db = client.waiting_list_db
 collection = db.customers
 
 # Define the list of documents you want to insert
