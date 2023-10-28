@@ -3,7 +3,6 @@ import pymongo
 import smtplib
 from email.mime.text import MIMEText
 
-# Connect to MongoDB (replace YOUR_MONGODB_URI with your MongoDB Atlas connection string)
 client = pymongo.MongoClient("mongodb+srv://Admin:21bda024%40@cluster0.q64wwy9.mongodb.net/")
 db = client["waiting_list"]
 
