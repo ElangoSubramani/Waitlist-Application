@@ -10,8 +10,13 @@ collection_name = "customers"
 db = client[db_name]
 customer_list_collection = db[collection_name]
 
-# Default waiting list position
 current_position = 99
+def current_position():
+    return current_position
+def increment_current_position():
+    return current_position + 1
+# Generate a unique referral link for a customer
+
 def generate_referral_link(email):
     # You can use a hash function or other unique token generation method here
     # For simplicity, you can use a basic example:
