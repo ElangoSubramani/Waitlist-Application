@@ -88,11 +88,14 @@ class WaitingListApp:
         if customer:
             # Update the position and total_referrals fields
             self.customer_list_collection.update_one(
+                # The email address is used to find the customer
                 {"email": email},
                 {
+                    # The position and total_referrals fields are updated
                     "$set": {
                         "position": position,
                         "total_referrals": total_referrals
+                        # The updated customer details are returned
                     }
                 }
             )
@@ -129,8 +132,10 @@ class WaitingListApp:
 
         referral_link = self.generate_referral_link(email)
 
-        self.customer_list_collection.insert_one({"name":name,"email": email,"password":password, "position": position, "referral_link": referral_link,"total_refers":total_refers})
+        # The customer is added to the waiting list
 
+        self.customer_list_collection.insert_one({"name":name,"email": email,"password":password, "position": position, "referral_link": referral_link,"total_refers":total_refers})
+        # The customer details are returned
         return jsonify({
             "message": "You have been added to the waiting list",
            "name":name,
@@ -139,7 +144,7 @@ class WaitingListApp:
              "position": position, 
              "referral_link": referral_link,
              "total_referrals":total_refers
-        }), 201
+        }), 201 # The HTTP status code 201 is used to indicate a successful request
 
     def get_position(self, email):
         customer = self.customer_list_collection.find_one({"email": email})
