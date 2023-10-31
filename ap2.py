@@ -1,4 +1,7 @@
+
+
 """
+
 FileName: api_serer.py
 Author: ELANGO S
 Created Date: 27-10-2023
@@ -6,6 +9,8 @@ Description: This file is used to create a REST API server using Flask.
 packages: flask, pymongo
 class: WaitingListApp
 functions: signup, get_position, refer_friend, run
+
+
 """
 
 
@@ -24,18 +29,25 @@ class WaitingListApp:
         #The connection string contains the username and password of the database user
         self.client = MongoClient("mongodb+srv://Admin:21bda024%40@cluster0.q64wwy9.mongodb.net/") 
         #The name of the database and the collection are stored in variables
-        #The database and collection are created if they don't exist
+
         self.db_name = "waiting_list_db"
         self.collection_name = "customers"
         self.db = self.client[self.db_name]
+        #The list of collections in the database are obtained using the list_collection_names() method
+        #If the collection doesn't exist, it is created using the insert_many() method
         if not  self.collection_name in self.db.list_collection_names():
             self.initialize_database()
             
-
+        #The collection is stored in a variable
         self.customer_list_collection = self.db[self.collection_name]
+        #The current position is stored in a variable and is initialized to 99
         self.current_position = 99
+        #The routes are defined using the route() decorator
+        #The signup() method is called when the /signup route is accessed using the POST method
         self.app.route('/signup', methods=['POST'])(self.signup)
+        #The get_position() method is called when the /position/<email> route is accessed using the GET method
         self.app.route('/position/<email>', methods=['GET'])(self.get_position)
+        #The refer_friend() method is called when the /refer_friend/signup/<referral_mail> route is accessed using the POST method
         self.app.route('/refer_friend/signup/<referral_mail>', methods=['POST'])(self.refer_friend)
     def initialize_database(self):
         db = self.client.waiting_list_db
