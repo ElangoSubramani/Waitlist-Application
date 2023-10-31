@@ -1,20 +1,62 @@
- 
+"""
+FileName: api_serer.py
+Author: ELANGO S
+Created Date: 27-10-2023
+Description: This file is used to create a REST API server using Flask.
+packages: flask, pymongo
+class: WaitingListApp
+functions: signup, get_position, refer_friend, run
+"""
+
+
+#Importing the required packages
+
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
-
+#Creating a class WaitingListApp
 class WaitingListApp:
+    #Initializing the class using __init__ method(constructer)
     def __init__(self):
+        #Creating a Flask app
         self.app = Flask(__name__)
+        #Creating a MongoDB connection using MongoClient the connection string is passed as an argument to the MongoClient constructor
+        #The connection string is obtained from the MongoDB Atlas dashboard
+        #The connection string contains the username and password of the database user
         self.client = MongoClient("mongodb+srv://Admin:21bda024%40@cluster0.q64wwy9.mongodb.net/") 
+        #The name of the database and the collection are stored in variables
+        #The database and collection are created if they don't exist
         self.db_name = "waiting_list_db"
         self.collection_name = "customers"
         self.db = self.client[self.db_name]
+        if not  self.collection_name in self.db.list_collection_names():
+            self.initialize_database()
+            
+
         self.customer_list_collection = self.db[self.collection_name]
         self.current_position = 99
-
         self.app.route('/signup', methods=['POST'])(self.signup)
         self.app.route('/position/<email>', methods=['GET'])(self.get_position)
         self.app.route('/refer_friend/signup/<referral_mail>', methods=['POST'])(self.refer_friend)
+    def initialize_database(self):
+        db = self.client.waiting_list_db
+        collection = db.customers
+
+        # Define the list of documents you want to insert
+        data = [
+            {
+                "username": "admin",
+                "password": "hashed_password",
+                "role": "admin"
+            },
+        
+        ]
+
+        # Insert the documents into the collection
+        result = collection.insert_many(data)
+
+        # Print the IDs of the inserted documents
+        print("Created database:", result.inserted_ids)
+
 
     def generate_referral_link(self, email):
         referral_code = email.replace("@", "$").replace(".", "&")
