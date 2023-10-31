@@ -145,7 +145,7 @@ class WaitingListApp:
              "referral_link": referral_link,
              "total_referrals":total_refers
         }), 201 # The HTTP status code 201 is used to indicate a successful request
-
+    
     def get_position(self, email):
         customer = self.customer_list_collection.find_one({"email": email})
         if customer:
@@ -153,10 +153,13 @@ class WaitingListApp:
             return jsonify({"position": position}), 200
         else:
             return jsonify({"error": "You are not on the waiting list"}), 404
-
+    #The refer_friend() method is used to add a new customer to the waiting list using a referral link
     def refer_friend(self, referral_mail):
+        # The referral link is decoded to obtain the email address
+        # The email address is used to find the customer in the collection
         referral_mail = referral_mail.replace("$", "@").replace("&", ".")
         customer = self.customer_list_collection.find_one({"email": referral_mail})
+        # If the customer exists (True)
         if customer:
             data = request.get_json()
             email = data.get('email')
