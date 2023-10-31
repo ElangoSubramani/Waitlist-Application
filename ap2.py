@@ -49,8 +49,11 @@ class WaitingListApp:
         self.app.route('/position/<email>', methods=['GET'])(self.get_position)
         #The refer_friend() method is called when the /refer_friend/signup/<referral_mail> route is accessed using the POST method
         self.app.route('/refer_friend/signup/<referral_mail>', methods=['POST'])(self.refer_friend)
+    #The initialize_database() method is used to create the database and insert the documents into the collection
     def initialize_database(self):
+        # Create the database
         db = self.client.waiting_list_db
+        # Specify the database and collection you want to insert the documents into
         collection = db.customers
 
         # Define the list of documents you want to insert
@@ -69,15 +72,18 @@ class WaitingListApp:
         # Print the IDs of the inserted documents
         print("Created database:", result.inserted_ids)
 
-
+    #The generate_referral_link() method is used to generate the referral link
     def generate_referral_link(self, email):
+        # The email address is used to generate the referral link
         referral_code = email.replace("@", "$").replace(".", "&")
+        # The referral link is returned
         referral_link = f"http://127.0.0.1:5000/refer_friend/signup/{referral_code}"
         return referral_link
-
+    #The update_customer() method is used to update the position and total_referrals fields of the existing customer
     def update_customer(self, email, position, total_referrals):
         # Find the customer in the collection
         customer = self.customer_list_collection.find_one({"email": email})
+        # If the customer exists
         
         if customer:
             # Update the position and total_referrals fields
@@ -92,22 +98,34 @@ class WaitingListApp:
             )
 
 
-
+    #The signup() method is used to add a new customer to the waiting list
     def signup(self):
+        # The request data is obtained using the get_json() method
         data = request.get_json()
+        # The email, name and password are obtained from the request data
         email = data.get('email')
+        #The email address is used to generate the referral link
         name= data.get('name')
+        #The email address is used to generate the referral link
         password = data.get('password')
+        #The email address is used to generate the referral link
         total_refers=0
+        # If the email, name or password is not provided, an error message is returned 
+        # The HTTP status code 400 is used to indicate a bad request 
 
         if not email or not name or not password:
             return jsonify({"error": "Name , Email & Password is required"}), 400
-
+        # If the customer already exists, an error message is returned
+        # The HTTP status code 400 is used to indicate a bad request
         if self.customer_list_collection.find_one({"email": email}):
             return jsonify({"error": "You are already on the waiting list"}), 400
-
+        # The position is incremented by 1
+        # The current position is stored in a variable and is initialized to 99
         position = self.current_position
+        # The current position is stored in a variable and is initialized to 99
         self.current_position += 1
+        # The referral link is generated using the generate_referral_link() method
+        # The referral link is stored in a variable called referral_link
 
         referral_link = self.generate_referral_link(email)
 
