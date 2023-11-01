@@ -161,14 +161,19 @@ class WaitingListApp:
         customer = self.customer_list_collection.find_one({"email": referral_mail})
         # If the customer exists (True)
         if customer:
+            # The request data is obtained using the get_json() method
             data = request.get_json()
+            # The email, name and password are obtained from the request data
+            # The email address is used to generate the referral link
             email = data.get('email')
             name= data.get('name')
             password = data.get('password')
+            #initializing the position and total_refers fields of the new customer
             total_refers=0
-            print(customer["position"])
             updated_postion=customer["position"]-1
             updated_total_refers=customer["total_refers"]+1
+
+            """
 
          # update_operation = {"$set": {"position": customer["position"]-1, "total_refers": customer[total_refers]+1}}
             # updated_status=self.customer_list_collection.find_one_and_update({"email": referral_mail},update_operation,return_document=True)
@@ -177,28 +182,37 @@ class WaitingListApp:
             # else:
                 # print("not updated")  
 
+
+            """
+
             if not email or not name or not password:
                 return jsonify({"error": "Name , Email & Password is required"}), 400
 
             if self.customer_list_collection.find_one({"email": email}):
                 return jsonify({"error": "You are already on the waiting list"}), 400
-#update the position and total_referrals fields of the existing customer which is referral_mail
+            #update the position and total_referrals fields of the existing customer which is referral_mail
             self.customer_list_collection.update_one(
+                # The email address is used to find the customer
                 {"email": referral_mail},
                 {
+                    #`$set` operator replaces the value of a field with the specified value.
                     "$set": {
                         "position": updated_postion,
                         "total_referrals": updated_total_refers
                     }
                 }
             )
+            # The position is incremented by 1
             position = self.current_position
             self.current_position += 1
+            # The referral link is generated using the generate_referral_link() method
 
             referral_link = self.generate_referral_link(email)
+            # The customer is added to the waiting list
 
+           
             self.customer_list_collection.insert_one({"name":name,"email": email,"password":password, "position": position, "referral_link": referral_link,"total_refers":total_refers})
-
+            # The customer details are returned
             return jsonify({
                 "message": "You have been added to the waiting list",
             "name":name,
@@ -210,11 +224,16 @@ class WaitingListApp:
             }), 201
 
         else:
+            # If the customer doesn't exist, an error message is returned
             return jsonify({"error": "Invalid referral link"}), 404
-
+    #The run() method is used to run the Flask app
     def run(self):
+        # The debug mode is enabled
         self.app.run(debug=True)
-
+#The main() function is used to create an instance of the WaitingListApp class and run the Flask app
 if __name__ == '__main__':
+    # An instance of the WaitingListApp class is created
     app = WaitingListApp()
+    # With the instance, the run() method is called to run the Flask app
     app.run()
+    
