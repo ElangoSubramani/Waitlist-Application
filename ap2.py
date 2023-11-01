@@ -46,7 +46,7 @@ class WaitingListApp:
         #The signup() method is called when the /signup route is accessed using the POST method
         self.app.route('/signup', methods=['POST'])(self.signup)
         #The get_position() method is called when the /position/<email> route is accessed using the GET method
-        self.app.route('/position/<email>', methods=['GET'])(self.get_position)
+        self.app.route('/get_user_login_data/<email>', methods=['GET'])(self.get_user_login_data)
         #The refer_friend() method is called when the /refer_friend/signup/<referral_mail> route is accessed using the POST method
         self.app.route('/refer_friend/signup/<referral_mail>', methods=['POST'])(self.refer_friend)
     #The initialize_database() method is used to create the database and insert the documents into the collection
@@ -146,11 +146,17 @@ class WaitingListApp:
              "total_referrals":total_refers
         }), 201 # The HTTP status code 201 is used to indicate a successful request
     
-    def get_position(self, email):
+    def get_user_login_data(self, email):
         customer = self.customer_list_collection.find_one({"email": email})
         if customer:
             position = customer["position"]
-            return jsonify({"position": position}), 200
+            return jsonify({
+                
+                "name":customer["name"],
+                "email": customer["email"],
+                "total_referrals":customer["total_refers"],
+                "referral_link": customer["referral_link"],
+                "position": position}), 200
         else:
             return jsonify({"error": "You are not on the waiting list"}), 404
     #The refer_friend() method is used to add a new customer to the waiting list using a referral link
@@ -198,7 +204,7 @@ class WaitingListApp:
                     #`$set` operator replaces the value of a field with the specified value.
                     "$set": {
                         "position": updated_postion,
-                        "total_referrals": updated_total_refers
+                        "total_refers": updated_total_refers
                     }
                 }
             )
