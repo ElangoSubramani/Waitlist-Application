@@ -44,10 +44,13 @@ class WaitingListApp:
         #The routes are defined using the route() decorator
         #The signup() method is called when the /signup route is accessed using the POST method
         self.app.route('/signup', methods=['POST'])(self.signup)
+        #The login() method is called when the /login/<email> route is accessed using the POST method
+        self.app.route('/login/<email>', methods=['POST'])(self.login)
         #The get_user_login_data() method is called when the /get_user_login_data/<email> route is accessed using the GET method
         self.app.route('/get_user_login_data/<email>', methods=['GET'])(self.get_user_login_data)
         #The refer_friend() method is called when the /refer_friend/signup/<referral_mail> route is accessed using the POST method
         self.app.route('/refer_friend/signup/<referral_mail>', methods=['POST'])(self.refer_friend)
+        
     #The initialize_database() method is used to create the database and insert the documents into the collection
     def initialize_database(self):
         # Create the database
@@ -144,7 +147,21 @@ class WaitingListApp:
              "referral_link": referral_link,
              "total_referrals":total_refers
         }), 201 # The HTTP status code 201 is used to indicate a successful request
-    
+    def login(self, email):
+        # The email address is used to find the customer in the collection
+        customer = self.customer_list_collection.find_one({"email": email})
+        # If the customer exists
+        if customer:
+           
+            return jsonify({
+                
+                "pass":customer["pass"],
+                "email": customer["email"],
+               
+               }), 200
+        else:
+            # If the customer doesn't exist, an error message is returned
+            return jsonify({"Incorrect Email or password"}), 404
     def get_user_login_data(self, email):
         # The email address is used to find the customer in the collection
         customer = self.customer_list_collection.find_one({"email": email})
