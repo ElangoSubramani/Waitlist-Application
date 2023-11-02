@@ -9,10 +9,9 @@ Description: This file is used to create a REST API server using Flask.
 packages: flask, pymongo
 class: WaitingListApp
 functions: signup, get_position, refer_friend, run
-
+Database: MongoDB Atlas
 
 """
-
 
 #Importing the required packages
 
@@ -45,7 +44,7 @@ class WaitingListApp:
         #The routes are defined using the route() decorator
         #The signup() method is called when the /signup route is accessed using the POST method
         self.app.route('/signup', methods=['POST'])(self.signup)
-        #The get_position() method is called when the /position/<email> route is accessed using the GET method
+        #The get_user_login_data() method is called when the /get_user_login_data/<email> route is accessed using the GET method
         self.app.route('/get_user_login_data/<email>', methods=['GET'])(self.get_user_login_data)
         #The refer_friend() method is called when the /refer_friend/signup/<referral_mail> route is accessed using the POST method
         self.app.route('/refer_friend/signup/<referral_mail>', methods=['POST'])(self.refer_friend)
@@ -60,7 +59,7 @@ class WaitingListApp:
         data = [
             {
                 "username": "admin",
-                "password": "hashed_password",
+                "password": "password",
                 "role": "admin"
             },
         
@@ -147,9 +146,13 @@ class WaitingListApp:
         }), 201 # The HTTP status code 201 is used to indicate a successful request
     
     def get_user_login_data(self, email):
+        # The email address is used to find the customer in the collection
         customer = self.customer_list_collection.find_one({"email": email})
+        # If the customer exists
         if customer:
+            # The position is obtained from the customer details
             position = customer["position"]
+            # The customer details are returned
             return jsonify({
                 
                 "name":customer["name"],
@@ -158,6 +161,7 @@ class WaitingListApp:
                 "referral_link": customer["referral_link"],
                 "position": position}), 200
         else:
+            # If the customer doesn't exist, an error message is returned
             return jsonify({"error": "You are not on the waiting list"}), 404
     #The refer_friend() method is used to add a new customer to the waiting list using a referral link
     def refer_friend(self, referral_mail):
