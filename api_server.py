@@ -50,6 +50,7 @@ class WaitingListApp:
         self.app.route('/get_user_login_data/<email>', methods=['GET'])(self.get_user_login_data)
         #The refer_friend() method is called when the /refer_friend/signup/<referral_mail> route is accessed using the POST method
         self.app.route('/refer_friend/signup/<referral_mail>', methods=['POST'])(self.refer_friend)
+        self.app.route('/admin_login/<email>/<password>', methods=['GET'])(self.admin_login)
         
     #The initialize_database() method is used to create the database and insert the documents into the collection
     def initialize_database(self):
@@ -61,11 +62,14 @@ class WaitingListApp:
         # Define the list of documents you want to insert
         data = [
            {
-    "email": "sample1@gmail.com",
+    "email": "admin@gmail.com",
     "name": "ELANGO S",
+   "password": "admin",
     "position": 99,
-    "referral_link": "http://127.0.0.1:5000/refer_friend/signup/sample1$gmail&com",
-    "total_referrals": 0
+    "referral_link": "http://127.0.0.1:5000/refer_friend/signup/admin@gmail.com",
+    "total_refers": 0
+   
+   
 }
         
         ]
@@ -155,8 +159,8 @@ class WaitingListApp:
       
         # The email address is used to find the customer in the collection
         customer = self.customer_list_collection.find_one({"email": email})
-        if not customer:
-            return jsonify({"Incorrect Email Id"}), 404
+        if  customer==None:
+            return jsonify({"error": "Incorrect Email Id"}), 404
         #password is checked
         if password==customer["password"]:
             # data= self.get_user_login_data(email)
@@ -190,6 +194,47 @@ class WaitingListApp:
             # If the customer doesn't exist, an error message is returned
             return jsonify({"error": "You are not on the waiting list"}), 404
     #The refer_friend() method is used to add a new customer to the waiting list using a referral link
+    def get_user_data(self, email):
+        # The email address is used to find the customer in the collection
+        customer = self.customer_list_collection.find_one({"email": email})
+        # If the customer exists
+        if customer:
+            # The position is obtained from the customer details
+            position = customer["position"]
+            # The customer details are returned
+            return {
+                
+                "name":customer["name"],
+                "email": customer["email"],
+                 "password": customer["password"],
+                "total_referrals":customer["total_refers"],
+                "referral_link": customer["referral_link"],
+                "position": position}
+        else:
+            # If the customer doesn't exist, an error message is returned
+            return ({"error": "You are not on the waiting list"})
+    def admin_login(self, email, password):
+        
+        
+      
+        # The email address is used to find the customer in the collection
+        customer = self.customer_list_collection.find_one({"email": email})
+        all_customers = (self.customer_list_collection.find({}))
+        if not customer:
+            return jsonify({"error": "Incorrect Email Id"}), 404
+        #password is checked
+        if password==customer["password"]:
+           ls=[]
+           for customer in all_customers:
+              ls.append( self.get_user_data(customer["email"]))
+      
+           return jsonify({"all_user_data": ls
+}), 201
+
+
+        else:
+            # If the customer doesn't exist, an error message is returned
+            return jsonify({"error":"Incorrect password"}), 404
     def refer_friend(self, referral_mail):
         # The referral link is decoded to obtain the email address
         # The email address is used to find the customer in the collection
@@ -262,6 +307,8 @@ class WaitingListApp:
         else:
             # If the customer doesn't exist, an error message is returned
             return jsonify({"error": "Invalid referral link"}), 404
+        
+    
     #The run() method is used to run the Flask app
     def run(self):
         # The debug mode is enabled
