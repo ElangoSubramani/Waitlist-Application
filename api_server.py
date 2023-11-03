@@ -45,7 +45,7 @@ class WaitingListApp:
         #The signup() method is called when the /signup route is accessed using the POST method
         self.app.route('/signup', methods=['POST'])(self.signup)
         #The login() method is called when the /login/<email> route is accessed using the POST method
-        self.app.route('/login/<email>', methods=['POST'])(self.login)
+        self.app.route('/login/<email>/<password>', methods=['GET'])(self.login)
         #The get_user_login_data() method is called when the /get_user_login_data/<email> route is accessed using the GET method
         self.app.route('/get_user_login_data/<email>', methods=['GET'])(self.get_user_login_data)
         #The refer_friend() method is called when the /refer_friend/signup/<referral_mail> route is accessed using the POST method
@@ -60,11 +60,13 @@ class WaitingListApp:
 
         # Define the list of documents you want to insert
         data = [
-            {
-                "username": "admin",
-                "password": "password",
-                "role": "admin"
-            },
+           {
+    "email": "sample1@gmail.com",
+    "name": "ELANGO S",
+    "position": 99,
+    "referral_link": "http://127.0.0.1:5000/refer_friend/signup/sample1$gmail&com",
+    "total_referrals": 0
+}
         
         ]
 
@@ -147,21 +149,28 @@ class WaitingListApp:
              "referral_link": referral_link,
              "total_referrals":total_refers
         }), 201 # The HTTP status code 201 is used to indicate a successful request
-    def login(self, email):
+    def login(self, email, password):
+        
+        
+      
         # The email address is used to find the customer in the collection
         customer = self.customer_list_collection.find_one({"email": email})
-        # If the customer exists
-        if customer:
-           
+        if not customer:
+            return jsonify({"Incorrect Email Id"}), 404
+        #password is checked
+        if password==customer["password"]:
+            # data= self.get_user_login_data(email)
+            
+        #    return data
             return jsonify({
                 
-                "pass":customer["pass"],
-                "email": customer["email"],
+                
+               "text":"Welcome" + customer["name"],
                
                }), 200
         else:
             # If the customer doesn't exist, an error message is returned
-            return jsonify({"Incorrect Email or password"}), 404
+            return jsonify({"Incorrect password"}), 404
     def get_user_login_data(self, email):
         # The email address is used to find the customer in the collection
         customer = self.customer_list_collection.find_one({"email": email})
