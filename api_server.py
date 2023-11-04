@@ -244,12 +244,12 @@ class WaitingListApp:
             return jsonify({"error": "Incorrect Email Id"}), 404
         # password is checked
         if password == customer["password"]:
-            #initialize a  empty list
+            # initialize a  empty list
             ls = []
             # The email address is used to find the customer in the collection
             for customer in all_customers:
                 ls.append(self.get_user_data(customer["email"]))
-            
+
             return jsonify({"all_user_data": ls
                             }), 201
 
@@ -332,9 +332,10 @@ class WaitingListApp:
         else:
             # If the customer doesn't exist, an error message is returned
             return jsonify({"error": "Invalid referral link"}), 404
-    def send_email(self,mail):
-    
-    # Your Gmail account credentials
+
+    def send_email(self, mail):
+
+        # Your Gmail account credentials
         gmail_user = "elanbit@gmail.com"
         gmail_password = "abcd1234@"
         subject = "You won a prize"
@@ -363,9 +364,8 @@ class WaitingListApp:
         except Exception as e:
             print(f"Email sending failed: {str(e)}")
 
-
     # The run() method is used to run the Flask app
-    def update_user(self,email):
+    def update_user(self, email):
         # Get the updated data from the request
         data = request.get_json()
 
@@ -377,22 +377,25 @@ class WaitingListApp:
 
         # Update user data
         updated_data = {
-            "name": data.get("name"),  # Update name if provided, else keep the same
-            "password": data.get("password"),  # Update password if provided, else keep the same
-    "position":data.get("position"),
-    "referral_link": data.get("referral_link"),  
-    "total_refers": data.get("total_refers"),
+            # Update name if provided, else keep the same
+            "name": data.get("name"),
+            # Update password if provided, else keep the same
+            "password": data.get("password"),
+            "position": data.get("position"),
+            "referral_link": data.get("referral_link"),
+            "total_refers": data.get("total_refers"),
 
-} 
+        }
 
         # Perform the update in the database
-        self.customer_list_collection.update_one({"email": email}, {"$set": updated_data})
+        self.customer_list_collection.update_one(
+            {"email": email}, {"$set": updated_data})
 
         return jsonify({"message": "User updated successfully", "user": updated_data}), 200
-    
-    def delete_user(self,email):
+
+    def delete_user(self, email):
         # Find the user by their email
-        user =  self.customer_list_collection.find_one({"email": email})
+        user = self.customer_list_collection.find_one({"email": email})
 
         if not user:
             return jsonify({"error": "User not found"}), 404
@@ -401,8 +404,6 @@ class WaitingListApp:
         self.customer_list_collection.delete_one({"email": email})
 
         return jsonify({"message": "User deleted successfully"}), 200
-    
-
 
     def run(self):
         # The debug mode is enabled
