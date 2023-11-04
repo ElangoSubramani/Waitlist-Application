@@ -20,7 +20,7 @@ from pymongo import MongoClient
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import environs
+from environs import Env
 # Creating a class WaitingListApp
 
 
@@ -33,8 +33,10 @@ class WaitingListApp:
         # The connection string is obtained from the MongoDB Atlas dashboard
         # The connection string contains the username and password of the database user
         # This is super duper important to replce the username and password with the actual username and password of the database user
-        self.client = MongoClient(
-            "mongodb+srv://Admin:21bda024%40@cluster0.q64wwy9.mongodb.net/")
+        self.env = Env()
+        self.env.read_env("environments.env")
+        self.client = MongoClient(self.env("MONGODB_ACCESS_KEY")
+            )
         # The name of the database and the collection are stored in variables
 
         self.db_name = "waiting_list_db"
