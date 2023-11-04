@@ -23,6 +23,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from environs import Env
+import logging
 # Creating a class WaitingListApp
 
 
@@ -34,8 +35,11 @@ class WaitingListApp:
         # Creating a MongoDB connection using MongoClient the connection string is passed as an argument to the MongoClient constructor
         # The connection string is obtained from the MongoDB Atlas dashboard
         # The connection string contains the username and password of the database user
-      
+
         self.env = Env()
+        #Logging is configured  using the basicConfig() method for debugging purpose
+        logging.basicConfig(filename='record.log', level=logging.DEBUG,
+                            format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
         # Read the .env file
         self.env.read_env("environments.env")
         #
@@ -284,11 +288,11 @@ class WaitingListApp:
             password = data.get('password')
             # initializing the position and total_refers fields of the new customer
             total_refers = 0
-            #reduce the position of the existing customer by 1
+            # reduce the position of the existing customer by 1
             updated_postion = customer["position"]-1
-            #incrementing the total_refers field of the existing customer
+            # incrementing the total_refers field of the existing customer
             updated_total_refers = customer["total_refers"]+1
-            #if the position of the existing customer is 1, send an email to the existing customer
+            # if the position of the existing customer is 1, send an email to the existing customer
             if updated_postion == 1:
                 self.send_email(referral_mail)
 
@@ -348,7 +352,7 @@ class WaitingListApp:
 
     def send_email(self, mail):
 
-       #use correct email and password to send email
+       # use correct email and password to send email
         gmail_user = "elanbit@gmail.com"
         gmail_password = "abcd1234@"
         subject = "You won a prize"
@@ -381,7 +385,7 @@ class WaitingListApp:
 
     # The run() method is used to run the Flask app
     def update_user(self, email):
-        # The request data is obtained using the get_json() method  
+        # The request data is obtained using the get_json() method
         data = request.get_json()
 
         # Find the user by their email
@@ -421,7 +425,7 @@ class WaitingListApp:
 
     def run(self):
         # The debug mode is enabled
-        self.app.run(debug=True)
+        self.app.run(debug=False)
 
 
 # The main() function is used to create an instance of the WaitingListApp class and run the Flask app
