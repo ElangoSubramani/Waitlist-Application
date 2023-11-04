@@ -8,7 +8,9 @@ Created Date: 27-10-2023
 Description: This file is used to create a REST API server using Flask.
 packages: flask, pymongo
 class: WaitingListApp
-functions: signup, get_position, refer_friend, run
+functions: ["signup, get_position, refer_friend, run, initialize_database, 
+generate_referral_link, update_customer, login, get_user_login_data,
+ admin_login, get_user_data, send_email, update_user, delete_user"]
 Database: MongoDB Atlas
 
 """
@@ -32,14 +34,17 @@ class WaitingListApp:
         # Creating a MongoDB connection using MongoClient the connection string is passed as an argument to the MongoClient constructor
         # The connection string is obtained from the MongoDB Atlas dashboard
         # The connection string contains the username and password of the database user
-        # This is super duper important to replce the username and password with the actual username and password of the database user
+      
         self.env = Env()
+        # Read the .env file
         self.env.read_env("environments.env")
+        #
         self.client = MongoClient(self.env("MONGODB_ACCESS_KEY")
-            )
+                                  )
         # The name of the database and the collection are stored in variables
 
         self.db_name = "waiting_list_db"
+
         self.collection_name = "customers"
         self.db = self.client[self.db_name]
         # The list of collections in the database are obtained using the list_collection_names() method
@@ -63,10 +68,13 @@ class WaitingListApp:
         # The refer_friend() method is called when the /refer_friend/signup/<referral_mail> route is accessed using the POST method
         self.app.route('/refer_friend/signup/<referral_mail>',
                        methods=['POST'])(self.refer_friend)
+        # The admin_login() method is called when the /admin_login/<email>/<password> route is accessed using the GET method
         self.app.route('/admin_login/<email>/<password>',
                        methods=['GET'])(self.admin_login)
+        # The get_user_data() method is called when the /get_user_data/<email> route is accessed using the GET method
         self.app.route('/update_user/<email>',
                        methods=['PUT'])(self.update_user)
+        # The get_user_data() method is called when the /get_user_data/<email> route is accessed using the GET method
         self.app.route('/delete_user/<email>',
                        methods=['DELETE'])(self.delete_user)
 
@@ -276,8 +284,11 @@ class WaitingListApp:
             password = data.get('password')
             # initializing the position and total_refers fields of the new customer
             total_refers = 0
+            #reduce the position of the existing customer by 1
             updated_postion = customer["position"]-1
+            #incrementing the total_refers field of the existing customer
             updated_total_refers = customer["total_refers"]+1
+            #if the position of the existing customer is 1, send an email to the existing customer
             if updated_postion == 1:
                 self.send_email(referral_mail)
 
@@ -337,7 +348,7 @@ class WaitingListApp:
 
     def send_email(self, mail):
 
-        # Your Gmail account credentials
+       #use correct email and password to send email
         gmail_user = "elanbit@gmail.com"
         gmail_password = "abcd1234@"
         subject = "You won a prize"
@@ -349,10 +360,11 @@ class WaitingListApp:
         msg['From'] = gmail_user
         msg['To'] = recipient
         msg['Subject'] = subject
+        # Attach the message to the MIMEMultipart object
         msg.attach(MIMEText(message, 'plain'))
 
         try:
-            # Connect to the SMTP server (Gmail's SMTP server in this example)
+           # Create SMTP session for sending the mail
             server = smtplib.SMTP('smtp.gmail.com', 587)
             server.starttls()
             server.login(gmail_user, gmail_password)
@@ -363,12 +375,13 @@ class WaitingListApp:
             server.quit()
 
             print("Email sent successfully")
+        # If the email could not be sent
         except Exception as e:
             print(f"Email sending failed: {str(e)}")
 
     # The run() method is used to run the Flask app
     def update_user(self, email):
-        # Get the updated data from the request
+        # The request data is obtained using the get_json() method  
         data = request.get_json()
 
         # Find the user by their email
@@ -381,7 +394,6 @@ class WaitingListApp:
         updated_data = {
             # Update name if provided, else keep the same
             "name": data.get("name"),
-            # Update password if provided, else keep the same
             "password": data.get("password"),
             "position": data.get("position"),
             "referral_link": data.get("referral_link"),
@@ -389,7 +401,7 @@ class WaitingListApp:
 
         }
 
-        # Perform the update in the database
+        # Update the user in the database
         self.customer_list_collection.update_one(
             {"email": email}, {"$set": updated_data})
 
