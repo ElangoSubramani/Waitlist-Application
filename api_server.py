@@ -17,6 +17,10 @@ Database: MongoDB Atlas
 
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import environs
 # Creating a class WaitingListApp
 
 
@@ -272,6 +276,8 @@ class WaitingListApp:
             total_refers = 0
             updated_postion = customer["position"]-1
             updated_total_refers = customer["total_refers"]+1
+            if updated_postion == 1:
+                self.send_email(referral_mail)
 
             """
 
@@ -326,6 +332,37 @@ class WaitingListApp:
         else:
             # If the customer doesn't exist, an error message is returned
             return jsonify({"error": "Invalid referral link"}), 404
+    def send_email(self,mail):
+    
+    # Your Gmail account credentials
+        gmail_user = "elanbit@gmail.com"
+        gmail_password = "abcd1234@"
+        subject = "You won a prize"
+        recipient = mail
+        message = "Congratulations! you reached a top position in the leaderboard, You won brand new iPhone 15 Pro Max."
+
+        # Create the email message
+        msg = MIMEMultipart()
+        msg['From'] = gmail_user
+        msg['To'] = recipient
+        msg['Subject'] = subject
+        msg.attach(MIMEText(message, 'plain'))
+
+        try:
+            # Connect to the SMTP server (Gmail's SMTP server in this example)
+            server = smtplib.SMTP('smtp.gmail.com', 587)
+            server.starttls()
+            server.login(gmail_user, gmail_password)
+
+            # Send the email
+            text = msg.as_string()
+            server.sendmail(gmail_user, recipient, text)
+            server.quit()
+
+            print("Email sent successfully")
+        except Exception as e:
+            print(f"Email sending failed: {str(e)}")
+
 
     # The run() method is used to run the Flask app
     def update_user(self,email):
@@ -364,6 +401,7 @@ class WaitingListApp:
         self.customer_list_collection.delete_one({"email": email})
 
         return jsonify({"message": "User deleted successfully"}), 200
+    
 
 
     def run(self):
