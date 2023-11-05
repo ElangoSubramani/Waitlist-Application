@@ -16,7 +16,7 @@ To get started, you need to set up a MongoDB Atlas cluster and obtain the databa
 
 3. Once your cluster is up and running, click the "Connect" button.
 
-4. Copy the provided database access string.
+4. Copy the provided database access string. (Note:I,ve already given my access key please use it for verification purpose only)
 
 <img src="assets\mongocomp.png"  align="center">
 
@@ -57,9 +57,9 @@ pip install -r requirements.txt
 
 2. Update the environments.env with your database access string .
 
-<img src="assets\mongocomp.png"  align="center">
-
 3. The file environments.env contains MONGODB_ACCESS_KEY, I,ve already given my access key please use it for verification purpose only
+
+<img src="assets\mongocomp.png"  align="center">
 
 ### Run the API Server
 
@@ -127,6 +127,8 @@ http://127.0.0.1:5000/signup
 ## Kindly refer the POSTMAN SAMPLE DATA (1).pdf for sample data format(GET, POST, PUT, DELETE)
 
 <br>
+
+## Kindly checkout my commit history
 
 ### Reach me out!
 

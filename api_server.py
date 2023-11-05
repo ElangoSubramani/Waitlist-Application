@@ -357,7 +357,7 @@ class WaitingListApp:
         gmail_password = "abcd1234@"
         subject = "You won a prize"
         recipient = mail
-        message = "Congratulations! you reached a top position in the leaderboard, You won brand new iPhone 15 Pro Max."
+        message = "Congratulations! you reached a top position in the leaderboard, You won brand new iPhone 15 Pro Max. Please contact us to claim your prize"
 
         # Create the email message
         msg = MIMEMultipart()
@@ -424,7 +424,7 @@ class WaitingListApp:
         return jsonify({"message": "User deleted successfully"}), 200
 
     def run(self):
-        # The debug mode is enabled
+        # The debug mode is disabled
         self.app.run(debug=False)
 
 
