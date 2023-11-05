@@ -2,7 +2,7 @@
 
 # WaitList Application:-
 
-This is the Waitlist Application developed for Cartrabbit.
+This  Waitlist Application submitted for Cartrabbit.
 
 ## Installation
 
@@ -22,13 +22,14 @@ To get started, you need to set up a MongoDB Atlas cluster and obtain the databa
 
 ### Setting up the Development Environment
 
-Before you can start developing this project, you need to set up your development environment. Make sure you have the following prerequisites installed:
+Before  developing this project, set up the development environment. Make sure the following prerequisites installed:
 
 - Python 3.9 or higher
 - MongoDB Atlas
 - MongoDB Compass[https://www.mongodb.com/try/download/compass]
 - PostMan
 - Git & Github
+- Windows or Linux OS (With minimum 4GB of RAM and 50GB of ROM)
 - AWS EC2, S3 (For Deployment purpose only not mandatory)
 
 
@@ -70,15 +71,20 @@ pip install -r requirements.txt
 
 The API should now be running locally. By default, Flask applications run on localhost (127.0.0.1) and port 5000.
 
+## record.log will start recording the log as soon as API starts which help us to monitor our API calls. 
+
+### The log file will be directly uploaded to AWS S3 using boto3 (For that We have to create a new IAM user with full access to the S3 service)
+
+
 ### Testing APIs with Postman
 
-1. Open Postman on your local machine.
+1. Open theh Postman on your local machine.
 
 1. Use Postman to make HTTP requests to your locally running API.
 
 #### To test a specific endpoint, follow these steps:
 
-1. Open Postman and create a new request.
+1. Open the Postman and create a new request.
 
 2. In the request type dropdown, select the appropriate HTTP method (e.g., GET, POST, PUT, DELETE) that corresponds to the API endpoint you want to test.
 
