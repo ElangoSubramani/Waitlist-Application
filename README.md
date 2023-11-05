@@ -1,4 +1,4 @@
-<img src="./images/logo.sample.png" alt="Logo of the project" align="right">
+<img src=".assets\cartrabbit_logo-pkzmj5imgyigk48dds0gvfykru9ke5f3ntqh4ssbjk.png" alt="Logo of the project" align="right">
 
 # WaitList Application:-
 
