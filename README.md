@@ -118,7 +118,7 @@ http://127.0.0.1:5000/signup
 }
 ```
 
-# Kindly refer the POSTMAN SAMPLE DATA (1).pdf for sample data format(GET, POST, PUT, DELETE)
+## Kindly refer the POSTMAN SAMPLE DATA (1).pdf for sample data format(GET, POST, PUT, DELETE)
 
 <br>
 
