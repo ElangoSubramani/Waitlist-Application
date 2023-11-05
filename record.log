@@ -1,5 +1,159 @@
-2023-11-04 07:04:11,932 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2023-11-04 12:28:37,644 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
-2023-11-04 07:04:11,932 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
-2023-11-04 07:04:14,888 INFO werkzeug Thread-6 : 127.0.0.1 - - [04/Nov/2023 07:04:14] "PUT /update_user/sample131@gmail.com HTTP/1.1" 200 -
-2023-11-04 07:04:23,611 INFO werkzeug Thread-7 : 127.0.0.1 - - [04/Nov/2023 07:04:23] "PUT /update_user/sample131@gmail.com HTTP/1.1" 200 -
+2023-11-04 12:28:37,646 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2023-11-04 12:30:12,061 INFO werkzeug Thread-6 : 127.0.0.1 - - [04/Nov/2023 12:30:12] "[31m[1mPOST /admin_login/admin@gmail.com/admin HTTP/1.1[0m" 405 -
+2023-11-04 12:30:22,980 INFO werkzeug Thread-7 : 127.0.0.1 - - [04/Nov/2023 12:30:22] "[35m[1mGET /admin_login/admin@gmail.com/admin HTTP/1.1[0m" 201 -
+2023-11-04 12:31:03,658 INFO werkzeug Thread-8 : 127.0.0.1 - - [04/Nov/2023 12:31:03] "[31m[1mGET /update_user/sample1345@gmail.com HTTP/1.1[0m" 405 -
+2023-11-04 12:31:13,533 INFO werkzeug Thread-9 : 127.0.0.1 - - [04/Nov/2023 12:31:13] "PUT /update_user/sample1345@gmail.com HTTP/1.1" 200 -
+2023-11-04 12:31:22,811 INFO werkzeug Thread-10 : 127.0.0.1 - - [04/Nov/2023 12:31:22] "PUT /update_user/sample1345@gmail.com HTTP/1.1" 200 -
+2023-11-04 12:36:13,885 INFO werkzeug Thread-11 : 127.0.0.1 - - [04/Nov/2023 12:36:13] "[31m[1mPUT /refer_friend/signup/sample13$gmail&com HTTP/1.1[0m" 405 -
+2023-11-04 14:20:06,694 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-11-04 14:20:06,694 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2023-11-04 14:21:57,290 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-11-04 14:21:57,295 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2023-11-04 14:31:39,812 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-11-04 14:31:39,814 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2023-11-04 14:34:39,977 INFO werkzeug Thread-6 : 127.0.0.1 - - [04/Nov/2023 14:34:39] "[31m[1mPOST /admin_login/admin@gmail.com/admi HTTP/1.1[0m" 405 -
+2023-11-04 14:34:46,852 INFO werkzeug Thread-7 : 127.0.0.1 - - [04/Nov/2023 14:34:46] "[33mGET /admin_login/admin@gmail.com/admi HTTP/1.1[0m" 404 -
+2023-11-04 14:34:53,892 INFO werkzeug Thread-8 : 127.0.0.1 - - [04/Nov/2023 14:34:53] "[35m[1mGET /admin_login/admin@gmail.com/admin HTTP/1.1[0m" 201 -
+2023-11-04 14:35:43,873 INFO werkzeug Thread-9 : 127.0.0.1 - - [04/Nov/2023 14:35:43] "[35m[1mGET /admin_login/admin@gmail.com/admin HTTP/1.1[0m" 201 -
+2023-11-04 15:37:04,058 ERROR api_server Thread-10 : Exception on /admin_login/admin@gmail.com/admin [GET]
+Traceback (most recent call last):
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\Karthick\Downloads\Waitlist-Application\api_server.py", line 253, in admin_login
+    customer = self.customer_list_collection.find_one({"email": email})
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\collection.py", line 1508, in find_one
+    for result in cursor.limit(-1):
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\cursor.py", line 1262, in next
+    if len(self.__data) or self._refresh():
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\cursor.py", line 1153, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\mongo_client.py", line 1868, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\mongo_client.py", line 1811, in __start_session
+    self._topology._check_implicit_session_support()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 583, in _check_implicit_session_support
+    self._check_session_support()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 599, in _check_session_support
+    self._select_servers_loop(
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 269, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed,ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed,ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed, Timeout: 30s, Topology Description: <TopologyDescription id: 65460870045d919fb3753112, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>, <ServerDescription ('ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>, <ServerDescription ('ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>]>
+2023-11-04 15:37:04,088 INFO werkzeug Thread-10 : 127.0.0.1 - - [04/Nov/2023 15:37:04] "[35m[1mGET /admin_login/admin@gmail.com/admin HTTP/1.1[0m" 500 -
+2023-11-05 06:23:12,995 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-11-05 06:23:12,996 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2023-11-05 09:59:28,747 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2023-11-05 09:59:28,747 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2023-11-05 10:00:47,875 INFO werkzeug Thread-6 : 127.0.0.1 - - [05/Nov/2023 10:00:47] "[35m[1mGET /admin_login/admin@gmail.com/admin HTTP/1.1[0m" 201 -
+2023-11-05 10:22:21,019 INFO werkzeug Thread-7 : 127.0.0.1 - - [05/Nov/2023 10:22:21] "[33mGET /siginup HTTP/1.1[0m" 404 -
+2023-11-05 10:22:27,143 INFO werkzeug Thread-8 : 127.0.0.1 - - [05/Nov/2023 10:22:27] "[33mPOST /siginup HTTP/1.1[0m" 404 -
+2023-11-05 10:22:44,022 INFO werkzeug Thread-9 : 127.0.0.1 - - [05/Nov/2023 10:22:44] "[33mPOST /siginup HTTP/1.1[0m" 404 -
+2023-11-05 10:22:54,539 INFO werkzeug Thread-10 : 127.0.0.1 - - [05/Nov/2023 10:22:54] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:23:13,211 INFO werkzeug Thread-11 : 127.0.0.1 - - [05/Nov/2023 10:23:13] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:23:35,091 INFO werkzeug Thread-12 : 127.0.0.1 - - [05/Nov/2023 10:23:35] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:23:58,160 INFO werkzeug Thread-13 : 127.0.0.1 - - [05/Nov/2023 10:23:58] "[31m[1mPOST /signup HTTP/1.1[0m" 400 -
+2023-11-05 10:25:03,056 INFO werkzeug Thread-14 : 127.0.0.1 - - [05/Nov/2023 10:25:03] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:25:17,438 INFO werkzeug Thread-15 : 127.0.0.1 - - [05/Nov/2023 10:25:17] "[31m[1mPUT /signup HTTP/1.1[0m" 405 -
+2023-11-05 10:25:22,717 INFO werkzeug Thread-16 : 127.0.0.1 - - [05/Nov/2023 10:25:22] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:26:23,969 INFO werkzeug Thread-17 : 127.0.0.1 - - [05/Nov/2023 10:26:23] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:27:42,981 INFO werkzeug Thread-18 : 127.0.0.1 - - [05/Nov/2023 10:27:42] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:27:56,652 INFO werkzeug Thread-19 : 127.0.0.1 - - [05/Nov/2023 10:27:56] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:28:31,552 INFO werkzeug Thread-20 : 127.0.0.1 - - [05/Nov/2023 10:28:31] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:28:50,592 INFO werkzeug Thread-21 : 127.0.0.1 - - [05/Nov/2023 10:28:50] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:29:31,401 INFO werkzeug Thread-22 : 127.0.0.1 - - [05/Nov/2023 10:29:31] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:29:45,624 INFO werkzeug Thread-23 : 127.0.0.1 - - [05/Nov/2023 10:29:45] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:30:06,282 INFO werkzeug Thread-24 : 127.0.0.1 - - [05/Nov/2023 10:30:06] "[31m[1mPOST /signup HTTP/1.1[0m" 415 -
+2023-11-05 10:30:28,699 INFO werkzeug Thread-25 : 127.0.0.1 - - [05/Nov/2023 10:30:28] "[35m[1mPOST /signup HTTP/1.1[0m" 201 -
+2023-11-05 10:42:54,348 INFO werkzeug Thread-26 : 127.0.0.1 - - [05/Nov/2023 10:42:54] "[35m[1mPOST /signup HTTP/1.1[0m" 201 -
+2023-11-05 10:57:52,282 INFO werkzeug Thread-27 : 127.0.0.1 - - [05/Nov/2023 10:57:52] "[33mGET /login/samplemail@cartrabit.com/1234 HTTP/1.1[0m" 404 -
+2023-11-05 10:58:08,174 INFO werkzeug Thread-28 : 127.0.0.1 - - [05/Nov/2023 10:58:08] "GET /login/samplemail@cartrabit1.com/1234 HTTP/1.1" 200 -
+2023-11-05 11:06:41,784 ERROR api_server Thread-29 : Exception on /login/samplemail@cartrabit1.com/1234 [GET]
+Traceback (most recent call last):
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\Karthick\Downloads\Waitlist-Application\api_server.py", line 192, in login
+    customer = self.customer_list_collection.find_one({"email": email})
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\collection.py", line 1508, in find_one
+    for result in cursor.limit(-1):
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\cursor.py", line 1262, in next
+    if len(self.__data) or self._refresh():
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\cursor.py", line 1153, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\mongo_client.py", line 1868, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\mongo_client.py", line 1811, in __start_session
+    self._topology._check_implicit_session_support()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 583, in _check_implicit_session_support
+    self._check_session_support()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 599, in _check_session_support
+    self._select_servers_loop(
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 269, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed,ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed,ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed, Timeout: 30s, Topology Description: <TopologyDescription id: 65471a24e9d7972e73756881, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>, <ServerDescription ('ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>, <ServerDescription ('ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>]>
+2023-11-05 11:06:41,847 INFO werkzeug Thread-29 : 127.0.0.1 - - [05/Nov/2023 11:06:41] "[35m[1mGET /login/samplemail@cartrabit1.com/1234 HTTP/1.1[0m" 500 -
+2023-11-05 11:06:51,918 ERROR api_server Thread-30 : Exception on /login/samplemail@cartrabit1.com/1234 [GET]
+Traceback (most recent call last):
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "C:\Users\Karthick\Downloads\Waitlist-Application\api_server.py", line 192, in login
+    customer = self.customer_list_collection.find_one({"email": email})
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\collection.py", line 1508, in find_one
+    for result in cursor.limit(-1):
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\cursor.py", line 1262, in next
+    if len(self.__data) or self._refresh():
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\cursor.py", line 1153, in _refresh
+    self.__session = self.__collection.database.client._ensure_session()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\mongo_client.py", line 1868, in _ensure_session
+    return self.__start_session(True, causal_consistency=False)
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\mongo_client.py", line 1811, in __start_session
+    self._topology._check_implicit_session_support()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 583, in _check_implicit_session_support
+    self._check_session_support()
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 599, in _check_session_support
+    self._select_servers_loop(
+  File "c:\Users\Karthick\Downloads\Waitlist-Application\env\lib\site-packages\pymongo\topology.py", line 269, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed,ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed,ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed, Timeout: 30s, Topology Description: <TopologyDescription id: 65471a24e9d7972e73756881, topology_type: ReplicaSetNoPrimary, servers: [<ServerDescription ('ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-00.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>, <ServerDescription ('ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-01.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>, <ServerDescription ('ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('ac-qgjpv50-shard-00-02.q64wwy9.mongodb.net:27017: [Errno 11001] getaddrinfo failed')>]>
+2023-11-05 11:06:51,918 INFO werkzeug Thread-30 : 127.0.0.1 - - [05/Nov/2023 11:06:51] "[35m[1mGET /login/samplemail@cartrabit1.com/1234 HTTP/1.1[0m" 500 -
+2023-11-05 11:07:27,623 INFO werkzeug Thread-31 : 127.0.0.1 - - [05/Nov/2023 11:07:27] "GET /login/samplemail@cartrabit1.com/1234 HTTP/1.1" 200 -
+2023-11-05 11:07:29,998 INFO werkzeug Thread-34 : 127.0.0.1 - - [05/Nov/2023 11:07:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2023-11-05 11:07:30,285 INFO werkzeug Thread-33 : 127.0.0.1 - - [05/Nov/2023 11:07:30] "GET /login/samplemail@cartrabit1.com/1234 HTTP/1.1" 200 -
+2023-11-05 11:18:03,604 INFO werkzeug Thread-35 : 127.0.0.1 - - [05/Nov/2023 11:18:03] "GET /get_user_login_data/samplemail@cartrabit1.com HTTP/1.1" 200 -
+2023-11-05 11:19:50,138 INFO werkzeug Thread-36 : 127.0.0.1 - - [05/Nov/2023 11:19:50] "GET /get_user_login_data/samplemail@cartrabit1.com HTTP/1.1" 200 -
+2023-11-05 11:23:15,015 INFO werkzeug Thread-37 : 127.0.0.1 - - [05/Nov/2023 11:23:15] "[35m[1mPOST /refer_friend/signup/samplemail$cartrabit1&com HTTP/1.1[0m" 201 -
+2023-11-05 11:28:34,210 INFO werkzeug Thread-38 : 127.0.0.1 - - [05/Nov/2023 11:28:34] "[35m[1mPOST /refer_friend/signup/samplemail$cartrabit1&com HTTP/1.1[0m" 201 -
+2023-11-05 11:41:04,049 INFO werkzeug Thread-39 : 127.0.0.1 - - [05/Nov/2023 11:41:04] "[33mPOST /get_user_data/samplemail@cartrabit1.com HTTP/1.1[0m" 404 -
+2023-11-05 11:41:10,214 INFO werkzeug Thread-40 : 127.0.0.1 - - [05/Nov/2023 11:41:10] "[33mGET /get_user_data/samplemail@cartrabit1.com HTTP/1.1[0m" 404 -
+2023-11-05 11:41:20,071 INFO werkzeug Thread-41 : 127.0.0.1 - - [05/Nov/2023 11:41:20] "GET /get_user_login_data/samplemail@cartrabit1.com HTTP/1.1" 200 -
+2023-11-05 12:03:37,911 INFO werkzeug Thread-42 : 127.0.0.1 - - [05/Nov/2023 12:03:37] "[33mPOST /update_user_data/samplemail@cartrabit1.com HTTP/1.1[0m" 404 -
+2023-11-05 12:03:50,139 INFO werkzeug Thread-43 : 127.0.0.1 - - [05/Nov/2023 12:03:50] "[31m[1mPOST /update_user/samplemail@cartrabit1.com HTTP/1.1[0m" 405 -
+2023-11-05 12:03:57,530 INFO werkzeug Thread-44 : 127.0.0.1 - - [05/Nov/2023 12:03:57] "PUT /update_user/samplemail@cartrabit1.com HTTP/1.1" 200 -
+2023-11-05 12:09:23,484 INFO werkzeug Thread-45 : 127.0.0.1 - - [05/Nov/2023 12:09:23] "[31m[1mGET /refer_friend/signup/samplemail$cartrabit1&com HTTP/1.1[0m" 405 -
+2023-11-05 12:09:23,790 INFO werkzeug Thread-46 : 127.0.0.1 - - [05/Nov/2023 12:09:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2023-11-05 12:34:34,313 INFO werkzeug Thread-47 : 127.0.0.1 - - [05/Nov/2023 12:34:34] "DELETE /delete_user/samplemail@cartrabit1.com HTTP/1.1" 200 -
+2023-11-05 12:46:58,509 INFO werkzeug Thread-48 : 127.0.0.1 - - [05/Nov/2023 12:46:58] "[31m[1mDELETE /admin_login/admin@gmail.com/admin HTTP/1.1[0m" 405 -
+2023-11-05 12:47:10,621 INFO werkzeug Thread-49 : 127.0.0.1 - - [05/Nov/2023 12:47:10] "[35m[1mGET /admin_login/admin@gmail.com/admin HTTP/1.1[0m" 201 -

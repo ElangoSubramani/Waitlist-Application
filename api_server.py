@@ -6,9 +6,9 @@ FileName: api_serer.py
 Author: ELANGO S
 Created Date: 27-10-2023
 Description: This file is used to create a REST API server using Flask.
-packages: flask, pymongo
-class: WaitingListApp
-functions: ["signup, get_position, refer_friend, run, initialize_database, 
+Packages: flask, pymongo
+Class: WaitingListApp
+Functions: ["signup, get_position, refer_friend, run, initialize_database, 
 generate_referral_link, update_customer, login, get_user_login_data,
  admin_login, get_user_data, send_email, update_user, delete_user"]
 Database: MongoDB Atlas
@@ -200,7 +200,7 @@ class WaitingListApp:
             return jsonify({
 
 
-                "text": "Welcome" + customer["name"],
+                "text": "Welcome " + customer["name"],
 
             }), 200
         else:
