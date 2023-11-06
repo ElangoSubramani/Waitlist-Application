@@ -74,7 +74,7 @@ The API should now be running locally. By default, Flask applications run on loc
 ### record.log will start recording the log as soon as API starts, which help us to monitor our API calls.
 
 
-<img src="assets\mongocomp.png"  align="center">
+<img src="assets\recordlog.png"  align="center">
 
 
 
