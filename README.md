@@ -29,6 +29,7 @@ Before  developing this project, set up the development environment. Make sure t
 - MongoDB Compass[https://www.mongodb.com/try/download/compass]
 - PostMan
 - Git & Github
+- VSCode
 - Windows or Linux OS (With minimum 4GB of RAM and 50GB of ROM)
 - AWS EC2, S3 (For Deployment purpose only not mandatory)
 
