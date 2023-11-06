@@ -71,7 +71,12 @@ pip install -r requirements.txt
 
 The API should now be running locally. By default, Flask applications run on localhost (127.0.0.1) and port 5000.
 
-## record.log will start recording the log as soon as API starts which help us to monitor our API calls. 
+### record.log will start recording the log as soon as API starts, which help us to monitor our API calls.
+
+
+<img src="assets\mongocomp.png"  align="center">
+
+
 
 ### The log file will be directly uploaded to AWS S3 using boto3 (For that We have to create a new IAM user with full access to the S3 service)
 
@@ -128,7 +133,9 @@ http://127.0.0.1:5000/signup
 
 <br>
 
-## Kindly check out my commit history
+## Acknowledgment
+
+This Repository was truly developed by me and is an original work  without copying or referencing code from any other repositories. Thank you for your understanding and trust in this project. And also I request you to check out my commit history for your reference. 
 
 ### Reach me out!
 
